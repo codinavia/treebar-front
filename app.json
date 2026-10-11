@@ -1,5 +1,6 @@
 {
   "expo": {
+<<<<<<< HEAD
     "name": "TreeBar",
     "slug": "TreeBar",
     "version": "1.0.0",
@@ -13,6 +14,17 @@
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
+=======
+    "name": "treebar-front",
+    "slug": "treebar-front",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "treebarfront",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "icon": "./assets/expo.icon"
+>>>>>>> 4e587f862824323552c09fa70e2051b0a75027ad
     },
     "android": {
       "adaptiveIcon": {
@@ -21,11 +33,17 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
+<<<<<<< HEAD
       "predictiveBackGestureEnabled": false,
       "package": "com.treebar.TreeBar"
     },
     "web": {
       "bundler": "metro",
+=======
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+>>>>>>> 4e587f862824323552c09fa70e2051b0a75027ad
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
@@ -43,12 +61,15 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+<<<<<<< HEAD
     },
     "extra": {
       "router": {},
       "eas": {
         "projectId": "e19172b6-7f8e-41b2-984d-e05bf08dfed4"
       }
+=======
+>>>>>>> 4e587f862824323552c09fa70e2051b0a75027ad
     }
   }
 }

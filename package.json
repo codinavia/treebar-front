@@ -1,13 +1,22 @@
 {
+<<<<<<< HEAD
   "name": "treebar",
+=======
+  "name": "treebar-front",
+>>>>>>> 4e587f862824323552c09fa70e2051b0a75027ad
   "main": "expo-router/entry",
   "version": "1.0.0",
   "dependencies": {
     "@expo/ui": "~57.0.22",
+<<<<<<< HEAD
     "@expo/vector-icons": "^15.0.2",
     "expo": "~57.0.27",
     "expo-constants": "~57.0.21",
     "expo-dev-client": "~57.0.19",
+=======
+    "expo": "~57.0.27",
+    "expo-constants": "~57.0.21",
+>>>>>>> 4e587f862824323552c09fa70e2051b0a75027ad
     "expo-device": "~57.0.2",
     "expo-font": "~57.0.4",
     "expo-glass-effect": "~57.0.4",
@@ -19,12 +28,19 @@
     "expo-symbols": "~57.0.3",
     "expo-system-ui": "~57.0.4",
     "expo-web-browser": "~57.0.3",
+<<<<<<< HEAD
     "nativewind": "^4.2.7",
+=======
+>>>>>>> 4e587f862824323552c09fa70e2051b0a75027ad
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.3",
     "react-native-gesture-handler": "~2.32.0",
+<<<<<<< HEAD
     "react-native-reanimated": "^4.5.1",
+=======
+    "react-native-reanimated": "4.5.1",
+>>>>>>> 4e587f862824323552c09fa70e2051b0a75027ad
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "~4.26.0",
     "react-native-web": "~0.21.0",
@@ -32,8 +48,11 @@
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
+<<<<<<< HEAD
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.19",
+=======
+>>>>>>> 4e587f862824323552c09fa70e2051b0a75027ad
     "typescript": "~6.0.3"
   },
   "scripts": {
