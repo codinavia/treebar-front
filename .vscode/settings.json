@@ -3,17 +3,5 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
-<<<<<<< HEAD
   }
-=======
-  },
-  "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/.DS_Store": true,
-    "**/Thumbs.db": true
-  },
-  "hide-files.files": []
->>>>>>> 4e587f862824323552c09fa70e2051b0a75027ad
 }

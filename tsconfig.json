@@ -15,13 +15,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-<<<<<<< HEAD
     "expo-env.d.ts",
     "nativewind-env.d.ts"
   ]
 }
-=======
-    "expo-env.d.ts"
-  ]
-}
->>>>>>> 4e587f862824323552c09fa70e2051b0a75027ad
