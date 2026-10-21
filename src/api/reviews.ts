@@ -9,7 +9,7 @@ export const get = (
     tipo: string
 ) => 
     client
-        .get<Review[]>(`/reviews/${encodeURIComponent(codigo_producto)}/${tipo}`)
+        .get<Review[]>(`/reviews/producto/${encodeURIComponent(codigo_producto)}/${tipo}`)
         .then((r) => r.data);
 
 export const getQuestions = () => 
