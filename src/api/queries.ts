@@ -6,13 +6,3 @@ export const create = (query: CreateQuery) =>
 
 export const get = (codigo_producto: string) =>
     client.get<Query[]>(`/queries/${encodeURIComponent(codigo_producto)}`).then((r) => r.data);
-
-export const getQueryAnswers = (
-    codigo_producto: string, 
-    pregunta: string
-) =>
-  client
-    .get<Query[]>(
-      `/queries/${encodeURIComponent(codigo_producto)}/${encodeURIComponent(pregunta)}`,
-    )
-    .then((r) => r.data);

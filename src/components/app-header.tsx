@@ -5,6 +5,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type Props = { title: string; showBack?: boolean };
 
+const volver = () =>
+  router.canGoBack() ? router.back() : router.replace("/");
+
 export function AppHeader({ title, showBack = true }: Props) {
   const insets = useSafeAreaInsets();
   return (
@@ -15,7 +18,7 @@ export function AppHeader({ title, showBack = true }: Props) {
       <View className="h-12 flex-row items-center">
         <View className="w-9">
           {showBack && (
-            <Pressable onPress={() => router.back()} hitSlop={10}>
+            <Pressable onPress={volver} hitSlop={10}>
               <Ionicons name="arrow-back" size={30} color="white" />
             </Pressable>
           )}
