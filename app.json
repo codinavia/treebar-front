@@ -38,7 +38,9 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      ["expo-camera", { "cameraPermission": "Necesitamos la cámara para escanear códigos de barras." }],
+      ["expo-location", { "locationWhenInUsePermission": "Usamos tu ubicación para encontrar talleres de reparación cercanos." }]
     ],
     "experiments": {
       "typedRoutes": true,

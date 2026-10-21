@@ -7,6 +7,7 @@
     "@expo/vector-icons": "^15.0.2",
     "axios": "^1.20.0",
     "expo": "~57.0.27",
+    "expo-camera": "~57.0.6",
     "expo-constants": "~57.0.21",
     "expo-dev-client": "~57.0.19",
     "expo-device": "~57.0.2",
@@ -14,6 +15,7 @@
     "expo-glass-effect": "~57.0.4",
     "expo-image": "~57.0.5",
     "expo-linking": "~57.0.12",
+    "expo-location": "~57.0.21",
     "expo-router": "~57.0.25",
     "expo-splash-screen": "~57.0.9",
     "expo-status-bar": "~57.0.1",
@@ -29,7 +31,9 @@
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "~4.26.0",
     "react-native-web": "~0.21.0",
-    "react-native-worklets": "0.10.1"
+    "react-native-webview": "13.16.1",
+    "react-native-worklets": "0.10.1",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
