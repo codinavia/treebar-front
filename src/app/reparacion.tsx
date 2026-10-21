@@ -1,36 +1,68 @@
 import { AppHeader } from "@/components/app-header";
+import { MapaUbicacion } from "@/components/mapa-ubicacion";
 import { RepairItem } from "@/components/repair-item";
-import { useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { Colors } from "@/constants/colors";
+import { format_distance } from "@/lib/utils";
+import { useProductoStore } from "@/store/producto";
+import { useLocalSearchParams } from "expo-router";
+import { useEffect } from "react";
+import { ActivityIndicator, Linking, ScrollView, Text, View } from "react-native";
 
-type Seccion = "specs" | "reviews";
+export default function ReparacionScreen() {
+  const { codigo } = useLocalSearchParams<{ codigo: string }>();
+  const { 
+    estado, 
+    reparaciones, 
+    ubicacion, 
+    codigo: cargado, 
+    cargar } 
+  = useProductoStore();
 
-export default function ProductoScreen() {
-  const [seccion, setSeccion] = useState<Seccion>("specs");
+  // Si el store está vacío, se recupera solo.
+  // Si ya estaba cargado, `cargar` no repite la petición.
+  useEffect(() => {
+    if (codigo) cargar(codigo);
+  }, [codigo]);
+
+  const cargando = cargado !== codigo || estado === "cargando";
+
+  // Los más cercanos primero
+  const ordenadas = [...reparaciones].sort(
+    (a, b) =>
+      (a.distanciaMetros ?? Infinity) - (b.distanciaMetros ?? Infinity),
+  );
 
   return (
     <View className="flex-1 bg-surface">
       <AppHeader title="Reparación" />
       <ScrollView contentContainerClassName="px-6 pb-10 pt-6">
-        <Text className="my-10 text-center text-2xl font-bold text-ink">
-          Sitios de reparación encontrados
-        </Text>
+        {ubicacion && (
+          <View className="mb-6">
+            <MapaUbicacion latitud={ubicacion.latitud} longitud={ubicacion.longitud} />
+          </View>
+        )}
 
-        <View className="gap-4">
-          <RepairItem
-            name="Tecno Mix"
-            type="Electrónica"
-            distance="0.8 Km"
-            onPress={() => console.log("Abrir ubicación de Tecno Mix")}
-          />
-
-          <RepairItem
-            name="Tecno Max"
-            type="Electrónica"
-            distance="0.8 Km"
-            onPress={() => console.log("Abrir ubicación de Tecno Max")}
-          />
-        </View>
+        {cargando ? (
+          <ActivityIndicator color={Colors.primary} />
+        ) : ordenadas.length === 0 ? (
+          <Text className="text-center text-ink">
+            No encontramos talleres de reparación cerca de ti.
+          </Text>
+        ) : (
+          <View className="gap-4">
+            {ordenadas.map((r, i) => (
+              <RepairItem
+                key={`${r.nombre}-${i}`}
+                name={r.nombre}
+                type={r.tipo ?? "Taller de reparación"}
+                distance={format_distance(r.distanciaMetros)}
+                onPress={() =>
+                  r.googleMapsUri && Linking.openURL(r.googleMapsUri)
+                }
+              />
+            ))}
+          </View>
+        )}
       </ScrollView>
     </View>
   );

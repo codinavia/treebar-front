@@ -19,11 +19,11 @@ export function RepairItem({ name, type, distance, onPress }: Props) {
         <Ionicons name="construct" size={30} color="white" />
       </View>
       <View className="ml-5 flex-1">
-        <Text className="text-xl font-bold text-black">{name}</Text>
-        <Text className="text-lg text-black">{type}</Text>
+        <Text className="uppercase text-base font-bold text-black" numberOfLines={2}>{name}</Text>
+        <Text className="text-base text-black">{type}</Text>
       </View>
       <View className="items-center">
-        <Text className="text-lg font-bold text-black">{distance}</Text>
+        <Text className="text-base font-bold text-black">{distance}</Text>
         <Ionicons
           name="navigate-outline"
           size={36}
