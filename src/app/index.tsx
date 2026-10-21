@@ -26,13 +26,13 @@ export default function HomeScreen() {
           <ActionCard
             label="Escanear Código"
             icon={<Ionicons name="camera" size={50} color="white" />}
-            onPress={() => router.push("/producto")}
+            onPress={() => router.push("/escanear")}
           />
           <ActionCard
             variant="outline"
             label="Ingresar Código"
             icon={<Ionicons name="keypad" size={50} color={Colors.white} />}
-            onPress={() => router.push("/producto")}
+            onPress={() => router.push("/ingresar")}
           />
         </View>
       </View>

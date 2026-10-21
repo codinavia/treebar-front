@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const baseUrl = process.env.EXPO_PUBLIC_API_URL;
 
@@ -10,3 +10,18 @@ export const client = axios.create({
   timeout: 15000,
   headers: { "Content-Type": "application/json" },
 });
+
+export function parse_error(error: unknown): string {
+  if (axios.isAxiosError(error)) {
+    const e = error as AxiosError;
+    if (e.response?.status === 429)
+      return "Demasiados escaneos seguidos. Espera un minuto e intenta de nuevo.";
+    if (e.response?.status === 404)
+      return "No encontramos ese producto.";
+    if (e.code === "ECONNABORTED")
+      return "El servidor tardó demasiado en responder.";
+    if (!e.response)
+      return "No hay conexión con el servidor.";
+  }
+  return "Ocurrió un error inesperado.";
+}

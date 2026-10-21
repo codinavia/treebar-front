@@ -1,11 +1,7 @@
-export type Error = {
-  statusCode?: number;
-  message?: string | string[];
-  error?: string;
-};
 
 /**
- * Tipos de datos asociados al módulo de reseñas.
+ * Tipos de datos asociados 
+ * al módulo de reseñas.
  */
 export type Comment = {
     id_criterio: string;
@@ -25,7 +21,8 @@ export type Review = {
 }
 
 /**
- * Tipos de datos asociados al módulo de preguntas.
+ * Tipos de datos asociados al 
+ * módulo de preguntas.
  */
 export type CreateQuery = {
     codigo_producto: string;
@@ -39,4 +36,36 @@ export type Answer = {
 export type Query = {
     pregunta: string;
     respuestas: Answer[];
+}
+
+/**
+ * Tipos de datos asociados al módulo 
+ * de escaner de productos.
+ */
+export type Location = {
+    latitud: number;
+    longitud: number;
+}
+
+export type Product = {
+    nombre: string;
+    marca?: string;
+    descripcion?: string;
+    imagenUrl?: string;
+    categoria?: string;
+    especificaciones?: Record<string, string>;
+    inferido: boolean;
+}
+
+export type RepairPlace = {
+    nombre: string;
+    distanciaMetros?: number;
+    googleMapsUri?: string;
+    tipo?: string;
+}
+
+export type ScanResponse = {
+    producto?: Product;
+    reparaciones?: RepairPlace[];
+    reseñas?: Review[];
 }
