@@ -3,16 +3,26 @@ import { AppHeader } from "@/components/app-header";
 import { ChatCard } from "@/components/chat-card";
 import { MenuButton } from "@/components/menu-button";
 import { EstadoInline } from "@/components/producto/estado-inline";
+import { PantallaEstado } from "@/components/producto/pantalla-estado";
 import { Colors } from "@/constants/colors";
 import { parse_error } from "@/lib/api";
+import { useProductoStore } from "@/store/producto";
 import type { Query } from "@/types/api";
 import { Ionicons } from "@expo/vector-icons";
-import { router, useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
 export default function DudasScreen() {
   const { codigo } = useLocalSearchParams<{ codigo: string }>();
+
+  // ---- Producto (del store) ----
+  const { estado, producto, codigo: cargado, cargar } =
+    useProductoStore();
+
+  useEffect(() => {
+    if (codigo) cargar(codigo); // no repite la petición si ya está cargado
+  }, [codigo]);
 
   // ---- Lista de preguntas ----
   const [preguntas, setPreguntas] = useState<Query[] | null>(null); // null = aún no cargado
@@ -20,6 +30,18 @@ export default function DudasScreen() {
   const [intento, setIntento] = useState(0);
 
   const [abierta, setAbierta] = useState<string | null>(null);
+
+  const primera = useRef(true);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (primera.current) {
+        primera.current = false;
+        return;
+      }
+      setIntento((n) => n + 1);
+    }, []),
+  );
 
   useEffect(() => {
     if (!codigo) return;
@@ -41,19 +63,24 @@ export default function DudasScreen() {
     setAbierta((actual) => (actual === pregunta ? null : pregunta));
   };
 
-  const renderRespuestas = (query: Query) => {
-    return (
-      <ChatCard
-        question={query.pregunta}
-        time=""
-        replies={query.respuestas.map((r) => ({
-          text: r.respuesta,
-          time: "",
-        }))}
-        onSend={(texto) => console.log("Respuesta:", texto)}
-      />
-    );
-  };
+  // ---- Pantallas completas ----
+  if (cargado !== codigo || estado === "cargando")
+    return <PantallaEstado variante="cargando" />;
+
+  if (estado === "noEncontrado" || !producto)
+    return <PantallaEstado variante="noEncontrado" codigo={codigo} />;
+
+  const renderRespuestas = (query: Query) => (
+    <ChatCard
+      question={query.pregunta}
+      time=""
+      replies={query.respuestas.map((r) => ({
+        text: r.respuesta,
+        time: "",
+      }))}
+      onSend={(texto) => console.log("Respuesta:", texto)}
+    />
+  );
 
   const renderContenido = () => {
     if (error)
@@ -99,6 +126,18 @@ export default function DudasScreen() {
     <View className="flex-1 bg-surface">
       <AppHeader title="Dudas" />
       <ScrollView contentContainerClassName="gap-4 px-6 pb-10 pt-6">
+        <View className="items-center">
+          {producto.marca && (
+            <Text className="text-base uppercase text-ink">{producto.marca}</Text>
+          )}
+          <Text
+            className="text-center text-3xl font-bold"
+            style={{ color: Colors.primaryDark }}
+          >
+            {producto.nombre}
+          </Text>
+        </View>
+
         {renderContenido()}
 
         <MenuButton
