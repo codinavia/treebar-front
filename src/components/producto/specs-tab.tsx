@@ -16,9 +16,9 @@ function FilaSpec({ etiqueta, valor }: { etiqueta: string; valor: string }) {
   );
 }
 
-type Props = { producto: Product; reparaciones: RepairPlace[] };
+type Props = { producto: Product; reparaciones: RepairPlace[]; codigo: string };
 
-export function SpecsTab({ producto, reparaciones }: Props) {
+export function SpecsTab({ producto, reparaciones, codigo }: Props) {
   return (
     <View className="gap-3">
       {producto.inferido && (
@@ -32,6 +32,7 @@ export function SpecsTab({ producto, reparaciones }: Props) {
       )}
 
       <View>
+        <FilaSpec etiqueta="Código" valor={codigo} />
         {Object.entries(producto.especificaciones ?? {}).map(([k, v]) => (
           <FilaSpec key={k} etiqueta={k} valor={v} />
         ))}

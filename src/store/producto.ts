@@ -60,6 +60,9 @@ export const useProductoStore = create<ProductoStore>((set, get) => ({
         ubicacion, // ← se guarda para el mapa
       });
     } catch (e) {
+        if (axios.isAxiosError(e)) {
+    console.log("code:", e.code, "| base:", e.config?.baseURL, "| url:", e.config?.url);
+  }
       if (get().codigo !== codigo) return;
       if (axios.isAxiosError(e) && e.response?.status === 404)
         set({ estado: "noEncontrado" });
@@ -75,8 +78,12 @@ export const useProductoStore = create<ProductoStore>((set, get) => ({
     try {
       data = await reviews.get(codigo, tipo);
     } catch (e) {
-      if (axios.isAxiosError(e) && e.response?.status === 404) data = [];
-      else throw e;
+      console.log("ERROR SCAN:", e);
+      if (axios.isAxiosError(e)) {
+        console.log("status:", e.response?.status, "body:", e.response?.data, "code:", e.code);
+      }
+      // if (axios.isAxiosError(e) && e.response?.status === 404) data = [];
+      // else throw e;
     }
     if (get().codigo !== codigo) return;
     set((s) => ({ resenas: { ...s.resenas, [tipo]: data } }));

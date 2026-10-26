@@ -8,4 +8,5 @@ export const Colors = {
   line: "#7FD08A",
   muted: "#7FA88A",
   white: "#FFFFFF",
+  red: "#DC2626",
 };

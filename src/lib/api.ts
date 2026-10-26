@@ -17,7 +17,11 @@ export function parse_error(error: unknown): string {
     if (e.response?.status === 429)
       return "Demasiados escaneos seguidos. Espera un minuto e intenta de nuevo.";
     if (e.response?.status === 404)
-      return "No encontramos ese producto.";
+      return "No encontramos ese producto";
+    if (e.response?.status === 409) 
+      return "Ya dejaste una reseña para este producto.";
+    if (e.response?.status === 400) 
+      return "Revisa los datos de tu reseña.";
     if (e.code === "ECONNABORTED")
       return "El servidor tardó demasiado en responder.";
     if (!e.response)

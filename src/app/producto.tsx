@@ -1,10 +1,13 @@
+import * as reviews from "@/api/reviews";
 import { AppHeader } from "@/components/app-header";
+import { AvisoModal } from "@/components/aviso-modal";
 import { MenuButton } from "@/components/menu-button";
 import { PantallaEstado } from "@/components/producto/pantalla-estado";
 import { ResenasTab } from "@/components/producto/resenas-tab";
 import { SpecsTab } from "@/components/producto/specs-tab";
 import { SegmentedTabs } from "@/components/segmented-tabs";
 import { Colors } from "@/constants/colors";
+import { obtenerHuella } from "@/lib/huella";
 import { useProductoStore } from "@/store/producto";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
@@ -25,6 +28,25 @@ export default function ProductoScreen() {
   } = useProductoStore();
 
   const [seccion, setSeccion] = useState<Seccion>("specs");
+  const [dejoReseña, setDejoReseña] = useState(false);
+  const [verificando, setVerificando] = useState(false);
+
+  const irADejarResena = async () => {
+  if (verificando || !codigo) return;
+  setVerificando(true);
+  try {
+    const previas = await reviews.getReviewByUser(await obtenerHuella(), codigo);
+    if (previas.some((r) => r.calificaciones.length > 0)) {
+      setDejoReseña(true);
+      return;
+    }
+  } catch {
+    
+  } finally {
+    setVerificando(false);
+  }
+    router.push({ pathname: "/deja-resena", params: { codigo } });
+  };
 
   useEffect(() => {
     if (codigo) cargar(codigo);
@@ -51,7 +73,7 @@ export default function ProductoScreen() {
 
   // ---- Pantalla principal ----
   return (
-    <View className="flex-1 bg-surface">
+    <View className="flex-1 bg-white">
       <AppHeader title="Información del producto" />
       <ScrollView contentContainerClassName="px-6 pb-10 pt-6">
         {producto.imagenUrl && (
@@ -80,12 +102,8 @@ export default function ProductoScreen() {
         <View className="gap-4">
           <MenuButton
             label="Dejar reseña"
-            icon={
-              <Ionicons name="star-outline" size={36} color={Colors.primary} />
-            }
-            onPress={() =>
-              router.push({ pathname: "/deja-resena", params: { codigo } })
-            }
+            icon={<Ionicons name="star-outline" size={36} color={Colors.primary} />}
+            onPress={irADejarResena}
           />
 
           <SegmentedTabs
@@ -98,7 +116,7 @@ export default function ProductoScreen() {
           />
 
           {seccion === "specs" ? (
-            <SpecsTab producto={producto} reparaciones={reparaciones} />
+            <SpecsTab producto={producto} reparaciones={reparaciones} codigo={codigo} />
           ) : (
             <ResenasTab />
           )}
@@ -126,6 +144,14 @@ export default function ProductoScreen() {
           />
         </View>
       </ScrollView>
+
+      <AvisoModal
+        visible={dejoReseña}
+        titulo="Ya dejaste una reseña"
+        mensaje="Solo se permite una reseña por producto."
+        onCerrar={() => setDejoReseña(false)}
+      />
+
     </View>
   );
 }
