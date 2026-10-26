@@ -37,7 +37,7 @@ export default function MasInfoScreen() {
     return <PantallaEstado variante="noEncontrado" codigo={codigo} />;
 
   return (
-    <View className="flex-1 bg-surface">
+    <View className="flex-1 bg-white">
       <AppHeader title="Más información" />
       <View className="flex-1 px-6 pt-6">
         <View className="my-6 items-center">

@@ -105,7 +105,7 @@ export default function CertificacionesScreen() {
           style={{ backgroundColor: Colors.primary }}
         >
           <Ionicons name="open-outline" size={20} color="white" />
-          <Text className="ml-2 font-semibold" style={{ color: "#fff" }}>
+          <Text className="ml-2 font-semibold" style={{ color: Colors.white }}>
             Ver sitio oficial
           </Text>
         </Pressable>
@@ -114,7 +114,7 @@ export default function CertificacionesScreen() {
   };
 
   return (
-    <View className="flex-1 bg-surface">
+    <View className="flex-1 bg-white">
       <AppHeader title="Certificaciones" />
       <ScrollView contentContainerClassName="gap-4 px-6 pb-10 pt-6">
         {producto && (

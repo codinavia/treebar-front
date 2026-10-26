@@ -33,7 +33,7 @@ export default function ReparacionScreen() {
   );
 
   return (
-    <View className="flex-1 bg-surface">
+    <View className="flex-1 bg-white">
       <AppHeader title="Reparación" />
       <ScrollView contentContainerClassName="px-6 pb-10 pt-6">
         {ubicacion && (
