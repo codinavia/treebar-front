@@ -31,7 +31,7 @@ export default function EscanearScreen() {
             className="rounded-full px-6 py-3"
             style={{ backgroundColor: Colors.primary }}
           >
-            <Text style={{ color: "#fff" }}>Dar permiso</Text>
+            <Text style={{ color: Colors.white }}>Dar permiso</Text>
           </Pressable>
         </View>
       </View>

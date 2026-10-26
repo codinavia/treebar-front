@@ -81,3 +81,13 @@ export type ScanResponse = {
     reparaciones?: RepairPlace[];
     reseñas?: Review[];
 }
+
+/**
+ * Tipos de datos asociados al módulo
+ * de certificaciones.
+ */
+export type Certification = {
+    nombre: string;
+    url: string;
+    descripcion: string;
+}

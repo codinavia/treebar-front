@@ -64,14 +64,6 @@ export default function MasInfoScreen() {
             }
           />
           <MenuButton
-            label="Sustentabilidad"
-            icon={<Ionicons name="leaf-outline" size={36} color={Colors.primaryDark} />}
-            iconPosition="right"
-            onPress={() =>
-              router.push({ pathname: "/sustentabilidad", params: { codigo } })
-            }
-          />
-          <MenuButton
             label="Certificaciones"
             icon={<Ionicons name="ribbon-outline" size={36} color={Colors.primaryDark} />}
             iconPosition="right"

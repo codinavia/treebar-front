@@ -16,7 +16,7 @@ import {
     View,
 } from "react-native";
 
-const MAX = 100; // la columna `pregunta` de la tabla duda es varchar(100)
+const MAX = 100;
 
 export default function PreguntaNuevaScreen() {
   const { codigo } = useLocalSearchParams<{ codigo: string }>();
