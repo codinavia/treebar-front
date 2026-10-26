@@ -40,8 +40,14 @@ export type Answer = {
 }
 
 export type Query = {
+    id: number;
     pregunta: string;
     respuestas: Answer[];
+}
+
+export type AnswerQuery = {
+    id_duda: number;
+    respuesta: string;
 }
 
 /**

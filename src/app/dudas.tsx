@@ -78,7 +78,11 @@ export default function DudasScreen() {
         text: r.respuesta,
         time: "",
       }))}
-      onSend={(texto) => console.log("Respuesta:", texto)}
+
+      onSend={async (texto) => {
+        await queries.answer({ id_duda: query.id, respuesta: texto });
+        setIntento((n) => n + 1);
+      }}
     />
   );
 
@@ -142,7 +146,13 @@ export default function DudasScreen() {
 
         <MenuButton
           label="Hacer una nueva pregunta"
-          icon={<Ionicons name="chatbubble" size={30} color={Colors.primaryDark} />}
+          icon={
+            <Ionicons
+              name="chatbubble-ellipses-outline"
+              size={28}
+              color={Colors.primaryDark}
+            />
+          }
           onPress={() =>
             router.push({ pathname: "/pregunta-nueva", params: { codigo } })
           }
