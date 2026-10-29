@@ -13,7 +13,7 @@ export default function MasInfoScreen() {
   const { estado, error, producto, codigo: cargado, cargar } =
     useProductoStore();
 
-  // Si el store está vacío (por ejemplo, tras recargar en web), se recupera solo.
+  // Si el store está vacío, se recupera solo.
   // Si ya estaba cargado, `cargar` no repite la petición.
   useEffect(() => {
     if (codigo) cargar(codigo);
