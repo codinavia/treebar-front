@@ -11,15 +11,17 @@ export default function HomeScreen() {
     <SafeAreaView className="flex-1 bg-surface">
       <View className="flex-1 px-6 pt-6">
         {/* Label en cuadro resaltado */}
+        {/*
         <View className="self-center rounded-2xl bg-white px-8 py-4 shadow">
           <Text className="text-xl font-bold text-ink">
             Escanea tus productos
           </Text>
         </View>
+        */}
 
         {/* Label directo, sin diseño */}
-        <Text className="my-10 text-center text-2xl font-bold text-ink">
-          Encuentra toda la información de tus productos
+        <Text className="my-10 text-center text-xl font-bold text-ink">
+          ENCUENTRA TODA LA INFORMACIÓN DE TUS PRODUCTOS
         </Text>
 
         <View className="gap-4">

@@ -103,7 +103,11 @@ export default function DejarResenaScreen() {
   return (
     <View className="flex-1 bg-surface">
       <AppHeader title="Tu reseña" />
-      <ScrollView contentContainerClassName="gap-4 px-6 pb-10 pt-6">
+      <ScrollView 
+        contentContainerClassName="gap-4 px-6 pb-80 pt-6"
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+      >
         {errorCarga ? (
           <EstadoInline
             variante="error"
@@ -131,7 +135,7 @@ export default function DejarResenaScreen() {
 
         {intentado && hayErrores && (
           <Text className="text-center" style={{ color: Colors.red }}>
-            Completa las preguntas marcadas en rojo.
+            Completa las preguntas marcadas en rojo
           </Text>
         )}
 
