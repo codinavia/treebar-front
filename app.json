@@ -39,8 +39,22 @@
           "imageWidth": 76
         }
       ],
-      ["expo-camera", { "cameraPermission": "Necesitamos la cámara para escanear códigos de barras." }],
-      ["expo-location", { "locationWhenInUsePermission": "Usamos tu ubicación para encontrar talleres de reparación cercanos." }]
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Necesitamos la cámara para escanear códigos de barras."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Usamos tu ubicación para encontrar talleres de reparación cercanos."
+        }
+      ],
+      "expo-font",
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
