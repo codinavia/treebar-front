@@ -30,7 +30,7 @@ export const useProductoStore = create<ProductoStore>((set, get) => ({
   producto: null,
   reparaciones: [],
   resenas: {},
-  ubicacion: null, // ← era `ubicacion = null` (asignación, no propiedad)
+  ubicacion: null,
 
   cargar: async (codigo, forzar = false) => {
     if (!forzar && get().codigo === codigo && get().estado === "ok") return;
@@ -47,6 +47,8 @@ export const useProductoStore = create<ProductoStore>((set, get) => ({
 
     try {
       const ubicacion = await obtenerUbicacion();
+      // console.log("Ubicación obtenida:", ubicacion);
+
       const d = await scan.aggregate(codigo, ubicacion);
       if (get().codigo !== codigo) return;
 
