@@ -6,17 +6,23 @@ import { format_distance } from "@/lib/utils";
 import { useProductoStore } from "@/store/producto";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
-import { ActivityIndicator, Linking, ScrollView, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Linking,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 
 export default function ReparacionScreen() {
   const { codigo } = useLocalSearchParams<{ codigo: string }>();
-  const { 
-    estado, 
-    reparaciones, 
-    ubicacion, 
-    codigo: cargado, 
-    cargar } 
-  = useProductoStore();
+  const {
+    estado,
+    reparaciones,
+    ubicacion,
+    codigo: cargado,
+    cargar,
+  } = useProductoStore();
 
   // Si el store está vacío, se recupera solo.
   // Si ya estaba cargado, `cargar` no repite la petición.
@@ -28,8 +34,7 @@ export default function ReparacionScreen() {
 
   // Los más cercanos primero
   const ordenadas = [...reparaciones].sort(
-    (a, b) =>
-      (a.distanciaMetros ?? Infinity) - (b.distanciaMetros ?? Infinity),
+    (a, b) => (a.distanciaMetros ?? Infinity) - (b.distanciaMetros ?? Infinity),
   );
 
   return (
@@ -38,7 +43,10 @@ export default function ReparacionScreen() {
       <ScrollView contentContainerClassName="px-6 pb-10 pt-6">
         {ubicacion && (
           <View className="mb-6">
-            <MapaUbicacion latitud={ubicacion.latitud} longitud={ubicacion.longitud} />
+            <MapaUbicacion
+              latitud={ubicacion.latitud}
+              longitud={ubicacion.longitud}
+            />
           </View>
         )}
 

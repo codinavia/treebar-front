@@ -1,4 +1,5 @@
 import * as reviews from "@/api/reviews";
+import { ActionCard } from "@/components/action-card";
 import { AppHeader } from "@/components/app-header";
 import { AvisoModal } from "@/components/aviso-modal";
 import { MenuButton } from "@/components/menu-button";
@@ -32,19 +33,21 @@ export default function ProductoScreen() {
   const [verificando, setVerificando] = useState(false);
 
   const irADejarResena = async () => {
-  if (verificando || !codigo) return;
-  setVerificando(true);
-  try {
-    const previas = await reviews.getReviewByUser(await obtenerHuella(), codigo);
-    if (previas.some((r) => r.calificaciones.length > 0)) {
-      setDejoReseña(true);
-      return;
+    if (verificando || !codigo) return;
+    setVerificando(true);
+    try {
+      const previas = await reviews.getReviewByUser(
+        await obtenerHuella(),
+        codigo,
+      );
+      if (previas.some((r) => r.calificaciones.length > 0)) {
+        setDejoReseña(true);
+        return;
+      }
+    } catch {
+    } finally {
+      setVerificando(false);
     }
-  } catch {
-    
-  } finally {
-    setVerificando(false);
-  }
     router.push({ pathname: "/deja-resena", params: { codigo } });
   };
 
@@ -102,7 +105,9 @@ export default function ProductoScreen() {
         <View className="gap-4">
           <MenuButton
             label="Dejar reseña"
-            icon={<Ionicons name="star-outline" size={36} color={Colors.primary} />}
+            icon={
+              <Ionicons name="star-outline" size={36} color={Colors.primary} />
+            }
             onPress={irADejarResena}
           />
 
@@ -116,7 +121,11 @@ export default function ProductoScreen() {
           />
 
           {seccion === "specs" ? (
-            <SpecsTab producto={producto} reparaciones={reparaciones} codigo={codigo} />
+            <SpecsTab
+              producto={producto}
+              reparaciones={reparaciones}
+              codigo={codigo}
+            />
           ) : (
             <ResenasTab />
           )}
@@ -151,7 +160,12 @@ export default function ProductoScreen() {
         mensaje="Solo se permite una reseña por producto."
         onCerrar={() => setDejoReseña(false)}
       />
-
+      <ActionCard
+        variant="outline"
+        label="¿Palabra complicada? ¡El glosario está aqui!"
+        icon={<Ionicons name="alert" size={50} color={Colors.white} />}
+        onPress={() => router.push("/glosario")}
+      />
     </View>
   );
 }
