@@ -12,7 +12,7 @@ export function GlosarioBoton() {
       onPress={() => router.push("/glosario")}
       accessibilityRole="button"
       accessibilityLabel="Abrir glosario de términos"
-      className="absolute flex-row items-center rounded-full px-4 py-3 active:opacity-80"
+      className="absolute left-6 right-6 flex-row items-center rounded-3xl px-6 py-5 active:opacity-80"      
       style={{
         bottom: insets.bottom + 16,
         backgroundColor: Colors.primary,
@@ -22,7 +22,7 @@ export function GlosarioBoton() {
         shadowOffset: { width: 0, height: 3 },
       }}
     >
-      <Text className="ml-3 flex-1 font-semibold text-base text-white">
+      <Text className="flex-1 font-semibold text-base text-white">
         ¿Palabra complicada? ¡El glosario está aquí!
       </Text>
     </Pressable>
