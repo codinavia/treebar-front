@@ -9,7 +9,7 @@ export function GlosarioBoton() {
 
   return (
     <View
-      className="absolute left-0 right-0 items-center"
+      className="absolute left-0 right-0 w-full items-center z-50"
       style={{ bottom: insets.bottom + 16 }}
       pointerEvents="box-none"
     >
