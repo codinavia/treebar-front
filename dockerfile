@@ -15,5 +15,5 @@ RUN pnpm expo export --platform web
 # ---- Servidor estático ----
 FROM caddy:2-alpine
 COPY --from=build /app/dist /srv
-COPY Caddyfile.front /etc/caddy/Caddyfile
+COPY Caddyfile /etc/caddy/Caddyfile
 EXPOSE 80
