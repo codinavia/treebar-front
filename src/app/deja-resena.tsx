@@ -158,11 +158,6 @@ export default function DejarResenaScreen() {
             <Text className="text-lg font-semibold" style={{ color: "#fff" }}>
               {enviando ? "Enviando..." : "Enviar"}
             </Text>
-
-            <Text className="text-center text-sm text-ink">
-              Para evitar reseñas duplicadas, se guarda un identificador anónimo en
-              este dispositivo. No incluye tu nombre ni datos personales.
-            </Text>
           </Pressable>
         )}
       </ScrollView>
