@@ -32,7 +32,7 @@ export function SpecsTab({ producto, reparaciones, codigo }: Props) {
       )}
 
       <View>
-        <FilaSpec etiqueta="Code" valor={codigo} />
+        <FilaSpec etiqueta="Código" valor={codigo} />
         {Object.entries(producto.especificaciones ?? {}).map(([k, v]) => (
           <FilaSpec key={k} etiqueta={k} valor={v} />
         ))}
