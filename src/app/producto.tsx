@@ -163,7 +163,7 @@ export default function ProductoScreen() {
       <ActionCard
         variant="outline"
         label="¿Palabra complicada? ¡El glosario está aqui!"
-        icon={<Ionicons name="alert" size={50} color={Colors.white} />}
+        icon={<Ionicons name="alert" size={30} color={Colors.white} />}
         onPress={() => router.push("/glosario")}
       />
     </View>
