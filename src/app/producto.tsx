@@ -14,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
+import { GlosarioBoton } from "@/components/glosario-boton";
 
 type Seccion = "specs" | "reviews";
 
@@ -78,7 +79,7 @@ export default function ProductoScreen() {
   return (
     <View className="flex-1 bg-white">
       <AppHeader title="Información del producto" />
-      <ScrollView contentContainerClassName="px-6 pb-10 pt-6">
+      <ScrollView contentContainerClassName="px-6 pb-28 pt-6">
         {producto.imagenUrl && (
           <Image
             source={{ uri: producto.imagenUrl }}
@@ -160,12 +161,7 @@ export default function ProductoScreen() {
         mensaje="Solo se permite una reseña por producto."
         onCerrar={() => setDejoReseña(false)}
       />
-      <ActionCard
-        variant="outline"
-        label="¿Palabra complicada? ¡El glosario está aqui!"
-        icon={<Ionicons name="alert" size={30} color={Colors.white} />}
-        onPress={() => router.push("/glosario")}
-      />
+      <GlosarioBoton />
     </View>
   );
 }
