@@ -12,14 +12,16 @@ export function GlosarioBoton() {
       onPress={() => router.push("/glosario")}
       accessibilityRole="button"
       accessibilityLabel="Abrir glosario de términos"
-      className="absolute top-4 left-1/2 -translate-x-1/2 flex-row items-center rounded-full px-4 py-3 active:opacity-80"
-      style={{
+      className="absolute left-1/2 -translate-x-1/2 flex-row items-center rounded-full px-4 py-3 active:opacity-80"      style={{
         bottom: insets.bottom + 16,
         backgroundColor: Colors.primary,
         elevation: 6,
+        shadowOpacity: 0.25,
+        shadowRadius: 6,
+        shadowOffset: { width: 0, height: 3 },
       }}
     >
-      <Text className="flex-1 font-semibold text-base text-white">
+      <Text className="ml-3 flex-1 font-semibold text-base text-white">
         ¿Palabra complicada? ¡El glosario está aquí!
       </Text>
     </Pressable>
