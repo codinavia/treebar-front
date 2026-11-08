@@ -81,6 +81,11 @@ export type ScanResponse = {
     reseñas?: Review[];
 }
 
+export type RecentlyScanned = {
+  codigo: string;
+  nombre: string | null;
+};
+
 /**
  * Tipos de datos asociados al módulo
  * de certificaciones.

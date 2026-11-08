@@ -120,7 +120,7 @@ export default function DejarResenaScreen() {
 
         {intentado && hayErrores && (
           <Text className="text-center" style={{ color: Colors.red }}>
-            Completa las preguntas marcadas en rojo
+            Es necesario que respondas todas las preguntas para poder enviar tu reseña.
           </Text>
         )}
 

@@ -21,7 +21,7 @@ export default function HomeScreen() {
         */}
 
           {/* Label directo, sin diseño */}
-          <Text className="my-10 text-center text-xl font-bold text-ink">
+          <Text className="my-10 text-center text-l font-bold text-ink">
             ENCUENTRA TODA LA INFORMACIÓN DE TUS PRODUCTOS
           </Text>
 
@@ -36,6 +36,12 @@ export default function HomeScreen() {
               label="Ingresar Código"
               icon={<Ionicons name="keypad" size={50} color={Colors.white} />}
               onPress={() => router.push("/ingresar")}
+            />
+            <ActionCard
+              variant="outline"
+              label="Escaneados recientemente"
+              icon={<Ionicons name="time-outline" size={50} color={Colors.white} />}
+              onPress={() => router.push("/recientes")}
             />
             <ActionCard
               variant="outline"
