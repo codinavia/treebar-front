@@ -1,9 +1,9 @@
 import { client } from "@/lib/api";
-import type { Location, ScanResponse } from "@/types/api";
+import type { Ubicacion, ScanResponse } from "@/types/api";
 
-export const aggregate = (codigo: string, ubicacion: Location) =>
+export const aggregate = (codigo: string, ubicacion: Ubicacion | null) =>
   client
     .get<ScanResponse>(`/scan/${encodeURIComponent(codigo)}`, {
-      params: { latitud: ubicacion.latitud, longitud: ubicacion.longitud },
+      params: ubicacion ? ubicacion : null,
     })
     .then((r) => r.data);

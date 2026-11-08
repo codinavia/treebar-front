@@ -53,7 +53,7 @@ export type AnswerQuery = {
  * Tipos de datos asociados al módulo 
  * de escaner de productos.
  */
-export type Location = {
+export type Ubicacion = {
     latitud: number;
     longitud: number;
 }
