@@ -73,7 +73,6 @@ export function ResenasTab() {
         {grupo.calificaciones.map((c, i) => (
           <ReviewCard
             key={`${c.id_criterio}-${i}`}
-            rating={c.calificacion}
             comment={c.comentario}
             date=""
           />

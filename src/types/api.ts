@@ -3,16 +3,15 @@
  * Tipos de datos asociados 
  * al módulo de reseñas.
  */
-export type Rating = {
+export type Comment = {
     id_criterio: string;
     comentario: string;
-    calificacion: number;
 }
 
 export type CreateReview = {
     huella_usuario: string;
     codigo_producto: string;
-    comentarios: Rating[];
+    comentarios: Comment[];
 }
 
 export type Review = {

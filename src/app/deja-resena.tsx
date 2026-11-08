@@ -11,8 +11,6 @@ import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
-type Respuesta = { comentario: string; calificacion: number };
-
 export default function DejarResenaScreen() {
   const { codigo } = useLocalSearchParams<{ codigo: string }>();
 
@@ -20,20 +18,17 @@ export default function DejarResenaScreen() {
   const [errorCarga, setErrorCarga] = useState<string | null>(null);
   const [intento, setIntento] = useState(0);
 
-  const [respuestas, setRespuestas] = useState<Record<string, Respuesta>>({});
+  const [respuestas, setRespuestas] = useState<Record<string, string>>({});
   const [enviando, setEnviando] = useState(false);
   const [errorEnvio, setErrorEnvio] = useState<string | null>(null);
   const [enviada, setEnviada] = useState(false);
   const [intentado, setIntentado] = useState(false);
 
-  const estrellasFaltan = (id: string) =>
-    (respuestas[id]?.calificacion ?? 0) === 0;
-  const comentarioFalta = (id: string) =>
-    !(respuestas[id]?.comentario ?? "").trim();
+  const comentarioFalta = (id: string) => 
+    !(respuestas[id] ?? "").trim();
 
-  const hayErrores = (criterios ?? []).some(
-    (c) => estrellasFaltan(c.id) || comentarioFalta(c.id),
-  );
+  const hayErrores = (criterios ?? []).some((c) => 
+    comentarioFalta(c.id));
 
   useEffect(() => {
     let cancelado = false;
@@ -47,12 +42,6 @@ export default function DejarResenaScreen() {
       cancelado = true;
     };
   }, [intento]);
-
-  const actualizar = (id: string, parcial: Partial<Respuesta>) =>
-    setRespuestas((p) => {
-      const actual: Respuesta = p[id] ?? { comentario: "", calificacion: 0 };
-      return { ...p, [id]: { ...actual, ...parcial } };
-    });
 
   const enviar = async () => {
     if (!codigo || !criterios || enviando) return;
@@ -68,8 +57,7 @@ export default function DejarResenaScreen() {
         codigo_producto: codigo,
         comentarios: criterios.map((c) => ({
           id_criterio: c.id,
-          comentario: respuestas[c.id].comentario.trim(),
-          calificacion: respuestas[c.id].calificacion,
+          comentario: respuestas[c.id].trim(),
         })),
       });
       useProductoStore.setState({ resenas: {} });
@@ -123,11 +111,8 @@ export default function DejarResenaScreen() {
               type="full"
               number={i + 1}
               question={c.pregunta}
-              stars={respuestas[c.id]?.calificacion ?? 0}
-              comment={respuestas[c.id]?.comentario ?? ""}
-              onStarsChange={(v) => actualizar(c.id, { calificacion: v })}
-              onCommentChange={(t) => actualizar(c.id, { comentario: t })}
-              starsError={intentado && estrellasFaltan(c.id)}
+              comment={respuestas[c.id] ?? ""}
+              onChange={(t) => setRespuestas((p) => ({ ...p, [c.id]: t }))}
               commentError={intentado && comentarioFalta(c.id)}
             />
           ))

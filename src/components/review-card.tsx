@@ -1,16 +1,15 @@
 import { Text, View } from "react-native";
-import { StarRating } from "./star-rating";
 
-type Props = { rating: number; date: string; comment: string };
+type Props = {
+  comment: string;
+  date?: string;
+};
 
-export function ReviewCard({ rating, date, comment }: Props) {
+export function ReviewCard({ comment, date }: Props) {
   return (
-    <View className="rounded-3xl border border-line bg-card-soft px-5 py-3">
-      <View className="flex-row items-center justify-between">
-        <StarRating value={rating} size={24} />
-        <Text className="text-primary">{date}</Text>
-      </View>
-      <Text className="mt-3 text-lg text-ink">{comment}</Text>
+    <View className="rounded-3xl border border-line bg-card-soft p-4">
+      {!!date && <Text className="mb-1 self-end text-sm text-muted">{date}</Text>}
+      <Text className="text-ink">{comment}</Text>
     </View>
   );
 }

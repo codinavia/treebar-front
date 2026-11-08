@@ -1,14 +1,10 @@
 import { Colors } from "@/constants/colors";
 import { Text, TextInput, View } from "react-native";
-import { StarRating } from "./star-rating";
 
 type FullProps = BaseProps & {
   type: "full";
-  stars: number;
   comment: string;
-  onStarsChange: (value: number) => void;
-  onCommentChange: (value: string) => void;
-  starsError?: boolean;
+  onChange: (value: string) => void;
   commentError?: boolean;
 };
 
@@ -17,21 +13,7 @@ type BaseProps = {
   question: string;
 };
 
-type TextProps = BaseProps & {
-  type: "text";
-  value: string;
-  onChange: (value: string) => void;
-};
-
-type StarsProps = BaseProps & {
-  type: "stars";
-  value: number;
-  onChange: (value: number) => void;
-};
-
-type Props = TextProps | StarsProps | FullProps;
-
-export function QuestionCard(props: Props) {
+export function QuestionCard(props: FullProps) {
   const { number, question } = props;
 
   if (props.type === "full") {
@@ -42,21 +24,9 @@ export function QuestionCard(props: Props) {
           <Text className="flex-1 text-lg text-ink">{question}</Text>
         </View>
 
-        <View
-          className="mt-3 items-center rounded-3xl border bg-card py-3"
-          style={props.starsError ? { borderColor: Colors.red } : undefined}
-        >
-          <StarRating value={props.stars} size={40} onChange={props.onStarsChange} />
-        </View>
-        {props.starsError && (
-          <Text className="mt-1 text-sm" style={{ color: Colors.red }}>
-            Elige una calificación.
-          </Text>
-        )}
-
         <TextInput
           value={props.comment}
-          onChangeText={props.onCommentChange}
+          onChangeText={props.onChange}
           placeholder="Escribe tu comentario"
           multiline
           maxLength={250}
@@ -80,19 +50,13 @@ export function QuestionCard(props: Props) {
         <Text className="flex-1 text-lg text-ink">{question}</Text>
       </View>
 
-      {props.type === "text" ? (
-        <TextInput
-          value={props.value}
-          onChangeText={props.onChange}
-          multiline
-          className="mt-3 h-28 border border-primary-dark bg-white p-2 text-ink"
-          textAlignVertical="top"
-        />
-      ) : (
-        <View className="mt-3 items-center rounded-3xl border border-line bg-card py-3">
-          <StarRating value={props.value} size={40} onChange={props.onChange} />
-        </View>
-      )}
+      <TextInput
+        value={props.comment}
+        onChangeText={props.onChange}
+        multiline
+        className="mt-3 h-28 border border-primary-dark bg-white p-2 text-ink"
+        textAlignVertical="top"
+      />
     </View>
   );
 }
